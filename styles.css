@@ -1,0 +1,128 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #548687;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.hide{
+    display: none;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.newgame{
+    width: 140px;
+    background-color: #fff;
+    font-size: 1rem;
+    color: #b0413e;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p{
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+h1{
+    font-size: 1.5rem;
+}
+
+.container_reset{
+    height: 20vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.row{
+    height: calc(100%);
+    width: calc(100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.board{
+    height: 300px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.cell{
+    background-color: #fff;
+    height: calc(100%);
+    width: calc(100%);
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #b0413e;
+    border: none;
+}
+
+.reset{
+    background-color: #fff;
+    font-size: 1rem;
+    color: #b0413e;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .board{
+        height: 200px;
+        width: 200px;
+    }
+    .cell{
+        height: 66px;
+        width: 66px;
+    }
+    h1{
+        font-size: 1rem;
+    }
+    .newgame{
+        font-size: 0.7rem;
+        width: 100px;
+        font-weight: bold;
+    }
+    .reset{
+        font-size: 0.7rem;
+        width: 50px;
+        font-weight: bold;
+    }
+}
