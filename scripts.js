@@ -1,50 +1,98 @@
-let cellbtn=document.querySelectorAll(".cell");
-let reset=document.getElementById("reset");
-let newGame=document.getElementById("newGame");
-let winner=document.querySelector(".hide");
+let board = document.querySelector("#board");
+let reset = document.querySelector("#reset-btn");
+let newGame = document.querySelector("#new-game-btn");
+let cells = document.querySelectorAll(".cell");
+let winDisplayX = document.querySelector(".player-score");
+let winDisplayO = document.querySelector(".player-scoreO");
+let turnX = true;
+let gameOver = false;
 
-let turn0 = true;
-
-const winPattern = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
+let winPatterns = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
 ];
-cellbtn.forEach((cell)=>{ 
-    cell.addEventListener("click",()=>{
-        cell.textContent = turn0 ? "X" : "O";
-        turn0 = !turn0;
-        cell.disabled = true;
-        checkWinner();
-    }); 
-});
-const checkWinner = () =>{
-    for(let pattern of winPattern){
-        let val1 = cellbtn[pattern[0]].textContent;
-        let val2 = cellbtn[pattern[1]].textContent;
-        let val3 = cellbtn[pattern[2]].textContent;
-        if(val1==="X" && val2==="X" && val3==="X" || val1==="O" && val2==="O" && val3==="O"){
-            winner.style.display="block";
-            winner.textContent=val1+" is winner";
-        }
+
+const highlightWinningCells = (pattern) => {
+  pattern.forEach((index) => {
+    cells[index].classList.add("winning-cell");
+  });
+};
+const highlightDrawCell = () => {
+  cells.forEach((cell) => cell.classList.add("winning-cell"));
+};
+
+const checkWinner = () => {
+  for (let pattern of winPatterns) {
+    let val1 = cells[pattern[0]].innerText;
+    let val2 = cells[pattern[1]].innerText;
+    let val3 = cells[pattern[2]].innerText;
+
+    if (val1 && val1 === val2 && val2 === val3) {
+      highlightWinningCells(pattern);
+      if (val1 === "X") {
+        winDisplayX.textContent = "Winner";
+        winDisplayO.textContent = "Loser";
+      } else {
+        winDisplayO.textContent = "Winner";
+        winDisplayX.textContent = "Loser";
+      }
+      gameOver = true;
+      return true;
     }
+  }
+
+  // Check for draw
+  if ([...cells].every((cell) => cell.innerText !== "")) {
+    highlightDrawCell();
+    winDisplayX.textContent = "It's a draw!";
+    winDisplayO.textContent = "It's a draw!";
+    gameOver = true;
+    return true;
+  }
+  return false;
+};
+
+board.addEventListener("click", (e) => {
+  if (gameOver) return;
+
+  if (e.target.classList.contains("cell") && e.target.innerText === "") {
+    e.target.innerText = turnX ? "X" : "O";
+    turnX = !turnX;
+    checkWinner();
+  }
+});
+
+const resetGame = () => {
+  cells.forEach((cell) => {
+    cell.innerText = "";
+    cell.classList.remove("winning-cell", "winning-cell");
+  });
+  turnX = true;
+  gameOver = false;
+  winDisplayX.textContent = "";
+  winDisplayO.textContent = "";
+};
+
+reset.addEventListener("click", resetGame);
+newGame.addEventListener("click", resetGame);
+
+let themeBtn = document.querySelector("#theme-btn");
+let themeIndex = 0;
+const themes = [
+  "linear-gradient(135deg,rgb(170, 209, 214) 0%,rgb(174, 191, 194) 100%)",
+  "linear-gradient(135deg,rgb(128, 118, 83) 0%,rgb(188, 169, 115) 100%)",
+  "linear-gradient(135deg,rgb(157, 180, 115) 0%,rgb(152, 111, 159) 100%)",
+  "linear-gradient(135deg,rgb(102, 153, 106) 0%,rgb(142, 187, 217) 100%)",
+  "linear-gradient(135deg,rgb(200, 150, 100) 0%,rgb(150, 200, 150) 100%)", 
+];
+function changeTheme() {
+  document.body.style.background = themes[themeIndex];
+  themeIndex = (themeIndex + 1) % themes.length; 
 }
-reset.addEventListener("click",()=>{
-    cellbtn.forEach((cell)=>{
-        cell.textContent="";
-        cell.disabled=false;
-    })
-    winner.style.display="none";
-})
-newGame.addEventListener("click",()=>{
-    cellbtn.forEach((cell)=>{
-        cell.textContent="";
-        cell.disabled=false;
-    })
-    winner.style.display="none";
-})
+themeBtn.addEventListener("click", changeTheme);

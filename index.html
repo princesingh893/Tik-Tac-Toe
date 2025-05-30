@@ -3,32 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tik Tac Toe Game</title>
+    <title> Tic Tac Toe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="hide"></div>
-    <h1>Tik Tac Toe Game</h1>
-    <div class="container_reset">
-        <button id="reset" class="reset">Reset</button>
-        <button id="newGame" class="newgame">New Game</button>
-    </div>
-    <div class="board">
-        <div class="row">
-            <button class="cell"></button>
-            <button class="cell"></button>
-            <button class="cell"></button>
-        </div>
-        <div class="row">
-            <button class="cell"></button>
-            <button class="cell"></button>
-            <button class="cell"></button>
-        </div>
-        <div class="row">
-            <button class="cell"></button>
-            <button class="cell"></button>
-            <button class="cell"></button>
-        </div>
+    <div class="container">
+        <header>
+            <h1>Tic Tac Toe</h1>
+        </header>
+        
+        <div class="game-container">
+            <div class="game-board" id="board">
+                <div class="cell" data-cell-index="0"></div>
+                <div class="cell" data-cell-index="1"></div>
+                <div class="cell" data-cell-index="2"></div>
+                <div class="cell" data-cell-index="3"></div>
+                <div class="cell" data-cell-index="4"></div>
+                <div class="cell" data-cell-index="5"></div>
+                <div class="cell" data-cell-index="6"></div>
+                <div class="cell" data-cell-index="7"></div>
+                <div class="cell" data-cell-index="8"></div>
+            </div>
+            
+            <div class="game-info">
+                <div class="status" id="status">Player X's turn</div>
+                
+                <div class="player-info">
+                    <div class="player x active" id="player-x">
+                        <div class="player-icon"><i class="fas fa-times"></i></div>
+                        <div class="player-name">Player X</div>
+                        <div class="player-score"></div>
+                    </div>
+                    
+                    <div class="player o" id="player-o">
+                        <div class="player-icon"><i class="far fa-circle"></i></div>
+                        <div class="player-name">Player O</div>
+                        <div class="player-scoreO"></div>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button class="reset-btn" id="reset-btn">
+                        <i class="fas fa-sync-alt"></i> Reset Board
+                    </button>
+                    <button class="new-game-btn" id="new-game-btn">
+                        <i class="fas fa-plus-circle"></i> New Game
+                    </button>
+                    <button class="theme-btn" id="theme-btn">
+                        <i class="fas fa-palette"></i> Change Theme
+                    </button>
+                </div>
+            </div>
+        </div> 
+        <footer>
+            <p>I make this UI/Ux design are you love this</p>
+        </footer>
     </div>
     <script src="scripts.js"></script>
 </body>
